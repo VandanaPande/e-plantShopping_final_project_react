@@ -9,14 +9,7 @@ export const CartSlice = createSlice({
   reducers: {
     // Adds a new item or increments quantity if it exists
     addItem: (state, action) => {
-      const { name, image, cost } = action.payload;
-   
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        state.items.push({ name, image, cost, quantity: 1 });
-      }
-    },
+     
 
     // Removes the item entirely from the cart based on name
     removeItem: (state, action) => {
@@ -25,10 +18,7 @@ export const CartSlice = createSlice({
 
     // Updates the quantity of an existing item
     updateQuantity: (state, action) => {
-      const { name, quantity } = action.payload;
-
-      if (itemToUpdate) {
-        itemToUpdate.quantity = quantity;
+     
       }
     },
   },
