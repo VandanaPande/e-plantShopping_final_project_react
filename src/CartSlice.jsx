@@ -11,18 +11,6 @@ export const CartSlice = createSlice({
     addItem: (state, action) => {
      
 
-    // Removes the item entirely from the cart based on name
-    removeItem: (state, action) => {
-       
-    },
-
-    // Updates the quantity of an existing item
-    updateQuantity: (state, action) => {
-     
-      }
-    },
-  },
-});
 
 // Export action creators
 export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
