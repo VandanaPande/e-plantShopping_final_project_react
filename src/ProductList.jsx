@@ -249,13 +249,16 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
-    const handleAddToCart = (product) => {
-        dispatch(addItem(product));
-        setAddedToCart((prevState) => ({
-           ...prevState,
-           [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
-         }));
-      };
+   const handleAddToCart = (product) => {
+  // Only dispatch if plant name is not "Snake Plant"
+  if (product.name !== "Snake Plant") {
+    dispatch(addItem(product));
+  }
+  setAddedToCart((prevState) => ({
+    ...prevState,
+    [product.name]: true,
+  }));
+};
         // Calculate total quantity of items in the cart
   const calculateTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
