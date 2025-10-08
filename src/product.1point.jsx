@@ -98,13 +98,10 @@ const plantsArray = [
     ],
   },
   {
-    category: "Succulent Plants",
+    category: 
     plants: [
       {
-        name: "Aloe Vera",
-        image:
-          "https://cdn.pixabay.com/photo/2016/10/18/21/22/aloe-vera-1756064_1280.jpg",
-        cost: "$14",
+      
       },
       {
         name: "Jade Plant",
