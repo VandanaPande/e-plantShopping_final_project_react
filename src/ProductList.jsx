@@ -15,7 +15,9 @@ function ProductList({ onHomeClick }) {
             plants: [
                 {
                     name: "Snake Plant",
-                    
+                    image: "https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg",
+                    description: "Produces oxygen at night, improving air quality.",
+                    cost: "$15"
                 },
                 {
                     name: "Spider Plant",
@@ -29,7 +31,12 @@ function ProductList({ onHomeClick }) {
                     description: "Removes mold spores and purifies the air.",
                     cost: "$18"
                 },
-               
+                {
+                    name: "Boston Fern",
+                    image: "https://cdn.pixabay.com/photo/2020/04/30/19/52/boston-fern-5114414_1280.jpg",
+                    description: "Adds humidity to the air and removes toxins.",
+                    cost: "$20"
+                },
                 {
                     name: "Rubber Plant",
                     image: "https://cdn.pixabay.com/photo/2020/02/15/11/49/flower-4850729_1280.jpg",
@@ -249,16 +256,13 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
-   const handleAddToCart = (product) => {
-  // Only dispatch if plant name is not "Snake Plant"
-  if (product.name !== "Snake Plant") {
-    dispatch(addItem(product));
-  }
-  setAddedToCart((prevState) => ({
-    ...prevState,
-    [product.name]: true,
-  }));
-};
+    const handleAddToCart = (product) => {
+        dispatch(addItem(product));
+        setAddedToCart((prevState) => ({
+           ...prevState,
+           [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
+         }));
+      };
         // Calculate total quantity of items in the cart
   const calculateTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -280,7 +284,7 @@ function ProductList({ onHomeClick }) {
                 </div>
                 <div style={styleObjUl}>
                     <div> <a href="#" onClick={(e) => handlePlantsClick(e)} style={styleA}>Plants</a></div>
-                    <div> <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}><h1 className='cart'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68"><rect width="156" height="156" fill="none"></rect><circle cx="80" cy="216" r="12"></circle><circle cx="184" cy="216" r="12"></circle><path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path></svg>}</h1></a></div>
+                    <div> <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}><h1 className='cart'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68"><rect width="156" height="156" fill="none"></rect><circle cx="80" cy="216" r="12"></circle><circle cx="184" cy="216" r="12"></circle><path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path></svg>{calculateTotalItems()}</h1></a></div>
                 </div>
             </div>
             {!showCart ? (
@@ -293,14 +297,15 @@ function ProductList({ onHomeClick }) {
             <div className="product-card" key={plantIndex}>
                 <img className="product-image" src={plant.image} alt={plant.name} />
                 <div className="product-title">{plant.name}</div>
-                  
+                <div className="product-discription">{plant.description}</div>
+                <div className="product-cost">{plant.cost}</div>   
                 {/*Similarly like the above plant.name show other details like description and cost*/}
                 <button
   className="product-button"
   onClick={() => handleAddToCart(plant)}
-  
+  disabled={addedToCart[plant.name]}
 >
-  {addedToCart[plant.name] ?: 'Add to Cart'}
+  {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
 </button>
             </div>
             ))}
