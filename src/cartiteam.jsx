@@ -12,7 +12,7 @@ const CartItem = ({ onContinueShopping }) => {
   const calculateTotalAmount = () => {
     let total = 0;
     cart.forEach(item => {
-      total += ;
+      total += parseFloat(item.cost.substring(1)) * item.quantity;
     });
     return total.toFixed(2);
   };
@@ -22,12 +22,12 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleIncrement = (item) => {
-    dispatch(updateQuantity({ name: item.name,));
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
 
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
-      dispatch(updateQuantity({ name: item.name,}));
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
     } else {
       dispatch(removeItem(item.name));
     }
@@ -39,11 +39,11 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
-    return (parseFloat(item.cost.substring(1)) * item.quantity).toFixed(2);
+   
   };
 
   const handleCheckoutShopping = (e) => {
-    );
+    alert('Functionality to be added for future reference');
   };
 
   return (
@@ -59,7 +59,8 @@ const CartItem = ({ onContinueShopping }) => {
           <div className="cart-item" key={item.name}>
             <img className="cart-item-image" src={item.image} alt={item.name} />
             <div className="cart-item-details">
-      
+              <div className="cart-item-name">{item.name}</div>
+              <div className="cart-item-cost">{item.cost}</div>
               <div className="cart-item-quantity">
                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
                 <span className="cart-item-quantity-value">{item.quantity}</span>
