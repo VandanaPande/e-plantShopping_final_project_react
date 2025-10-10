@@ -8,6 +8,12 @@ const CartItem = ({ onContinueShopping }) => {
   const dispatch = useDispatch();
 
 
+  // Removed some part of calculate total amount
+  const calculateTotalAmount = () => {
+    let total = 0;
+  
+    return total.toFixed(2);
+  };
 
   const handleContinueShopping = (e) => {
     onContinueShopping(e);
