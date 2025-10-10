@@ -9,8 +9,24 @@ export const CartSlice = createSlice({
   reducers: {
     // Adds a new item or increments quantity if it exists
     addItem: (state, action) => {
-     
+      const { name, image, cost } = action.payload;
+  
+      }
+    },
 
+    // Removes the item entirely from the cart based on name
+    removeItem: (state, action) => {
+        state.items = state.items.filter(item => item.name !== action.payload);
+    },
+
+    // Updates the quantity of an existing item
+    updateQuantity: (state, action) => {
+      const { name, quantity } = action.payload;
+   
+      }
+    },
+  },
+});
 
 // Export action creators
 export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
