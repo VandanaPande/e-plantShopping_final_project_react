@@ -3,25 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
 
-const CartItem = ({ onUpdateCart, onContinueShopping }) => {
+const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
+
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
     let total = 0;
     cart.forEach(item => {
-      total += item.quantity * parseFloat(item.cost.substring(1));
+      
     });
-    return total;
+    return total.toFixed(2);
   };
 
   const handleContinueShopping = (e) => {
-    onContinueShopping(e); // Call the function passed from the parent component
-  };
-
-  const handleCheckoutShopping = (e) => {
-    alert('Functionality to be added for future reference');
+    onContinueShopping(e);
   };
 
   const handleIncrement = (item) => {
@@ -32,22 +29,31 @@ const CartItem = ({ onUpdateCart, onContinueShopping }) => {
     if (item.quantity > 1) {
       dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
     } else {
-    
+      dispatch(removeItem(item.name));
     }
   };
 
   const handleRemove = (item) => {
-    dispatch(removeItem(item));
+    dispatch(removeItem(item.name));
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
-    return item.quantity * parseFloat(item.cost.substring(1));
+    return (parseFloat(item.cost.substring(1)) * item.quantity).toFixed(2);
+  };
+
+  const handleCheckoutShopping = (e) => {
+    alert('Functionality to be added for future reference');
   };
 
   return (
     <div className="cart-container">
-      <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+      <div className="cart-header">
+        <div className="cart-summary">
+          
+          <h2>Total Cart Amount: ${calculateTotalAmount()}</h2>
+        </div>
+      </div>
       <div>
         {cart.map(item => (
           <div className="cart-item" key={item.name}>
@@ -68,9 +74,9 @@ const CartItem = ({ onUpdateCart, onContinueShopping }) => {
       </div>
       <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'></div>
       <div className="continue_shopping_btn">
-        <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
+        <button className="get-started-button" onClick={onContinueShopping}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1" onClick={(e) => handleCheckoutShopping(e)}>Checkout</button>
+        <button className="get-started-button1" onClick={() => alert('Functionality to be added for future reference')}>Checkout</button>
       </div>
     </div>
   );
