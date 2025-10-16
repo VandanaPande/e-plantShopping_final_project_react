@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ProductList.css';
 import CartItem from './CartItem';
 
-//checking disabled removed diabled
+//checking disabled removed diabled and part of addtocartfunction
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
@@ -121,9 +121,7 @@ function ProductList({ onHomeClick }) {
   // Add to cart (dispatch) + mark as added locally
   const handleAddToCart = (product) => {
     dispatch(addItem(product));
-    setAddedToCart((prev) => ({
-      ...prev,
-      [product.name]: true,
+    
     }));
   };
 
