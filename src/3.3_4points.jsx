@@ -58,8 +58,8 @@ const CartItem = ({ onContinueShopping }) => {
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
       <div>
         {cart.map(item => (
-          <div className="cart-item" key={item.name}>
-            <img className="cart-item-image" src={item.image} alt={item.name} />
+        
+            
             <div className="cart-item-details">
             
               <div className="cart-item-cost">{item.cost}</div>
