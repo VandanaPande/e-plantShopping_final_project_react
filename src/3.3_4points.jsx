@@ -7,11 +7,10 @@ const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
     let total = 0;
     cart.forEach(item => {
-      const unit = parseFloat(item.cost.toString().substring(1)); // e.g. "$15" -> 15
+      const unit = parseFloat(item.cost.toString().substring(1));
       const qty = item.quantity || 0;
       if (!isNaN(unit)) {
         total += unit * qty;
@@ -24,7 +23,7 @@ const CartItem = ({ onContinueShopping }) => {
     onContinueShopping(e);
   };
 
-  const handleCheckoutShopping = (e) => {
+  const handleCheckoutShopping = () => {
     alert('Functionality to be added for future reference');
   };
 
@@ -36,7 +35,6 @@ const CartItem = ({ onContinueShopping }) => {
     if (item.quantity > 1) {
       dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
     } else {
-      // quantity would drop to 0 -> remove the item
       dispatch(removeItem(item.name));
     }
   };
@@ -45,7 +43,6 @@ const CartItem = ({ onContinueShopping }) => {
     dispatch(removeItem(item.name));
   };
 
-  // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
     const unit = parseFloat(item.cost.toString().substring(1));
     const qty = item.quantity || 0;
@@ -58,12 +55,12 @@ const CartItem = ({ onContinueShopping }) => {
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
       <div>
         {cart.map(item => (
-        
-            
+          <div className="cart-item" key={item.name}>
+            {/* Removed image */}
             <div className="cart-item-details">
-            
-              <div className="cart-item-cost">{item.cost}</div>
-           
+              <div className="cart-item-name">{item.name}</div> {/* ✅ Only this property is rendered */}
+              {/* Removed cost */}
+              <div className="cart-item-quantity">
                 <button className="cart-item-button cart-item-button-dec" onClick={() => handleDecrement(item)}>-</button>
                 <span className="cart-item-quantity-value">{item.quantity}</span>
                 <button className="cart-item-button cart-item-button-inc" onClick={() => handleIncrement(item)}>+</button>
